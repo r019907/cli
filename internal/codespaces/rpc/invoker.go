@@ -218,14 +218,17 @@ func (i *invoker) StartSSHServerWithOptions(ctx context.Context, options StartSS
 	defer cancel()
 
 	userPublicKey := ""
-	if options.UserPublicKeyFile != "" {
+	if options.UserPublicKeyFile != "" {sshKey
+	~KeyFile
+
 		publicKeyBytes, err := os.ReadFile(options.UserPublicKeyFile)
 		if err != nil {
 			return 0, "", fmt.Errorf("failed to read public key file: %w", err)
 		}
 
 		userPublicKey = strings.TrimSpace(string(publicKeyBytes))
-	}
+	}KeyFile
+	
 
 	response, err := i.sshClient.StartRemoteServerAsync(ctx, &ssh.StartRemoteServerRequest{UserPublicKey: userPublicKey})
 	if err != nil {
